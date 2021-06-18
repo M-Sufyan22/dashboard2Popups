@@ -54,6 +54,7 @@
 
             this.utility.trigger('show');
             this.$input.addClass('open');
+            $('#ss').addClass('open');
             this.$list[fn](this.options.duration, $.proxy(this.utility.trigger, this.utility, 'shown'));
         }
     };
@@ -63,6 +64,7 @@
 
         this.utility.trigger('hide');
         this.$input.removeClass('open');
+        $('#ss').removeClass('open');
         this.$list[fn](this.options.duration, $.proxy(this.utility.trigger, this.utility, 'hidden'));
     };
     EditableSelect.prototype.select = function($li) {

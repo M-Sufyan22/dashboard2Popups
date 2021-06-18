@@ -19,57 +19,60 @@
     var defaults = {
 
             // width and height in pixels
-            width: 280,
-            height: 280,
+width: 280,
+height: 280,
 
-            // z-inde property
-            zIndex: 1,
+// z-inde property
+zIndex: 1,
 
-            // selector or element
-            trigger: null,
+// selector or element
+trigger: null,
 
-            // offset
-            offset: [0, 1],
+// offset
+offset: [0, 1],
 
-            // custom CSS class
-            customClass: '',
+// custom CSS class
+customClass: '',
 
-            // date or month
-            view: 'date',
+// date or month
+view: 'date',
 
-            // current date  
-            date: new Date(),
+// current date  
+date: new Date(),
 
-            // date format
-            format: 'yyyy/mm/dd',
+// date format
+format: 'yyyy/mm/dd',
 
-            // start of week
-            startWeek: 0,
+// start of week
+startWeek: 0,
 
-            // day of the week
-            weekArray: ['S', 'M', 'D', 'M', 'D', 'F', 'S'],
+// day of the week
+weekArray: ['S', 'M', 'D', 'M', 'D', 'F', 'S'],
 
-            // date range
-            // [new Date(), null] or ['2015/11/23']
-            selectedRang: null,
+// month of the year
+monthArray: ['Jan','Feb','März','Apr','Mai','Juni','Juli','Aug','Sept','Okt','Nov','Dez'],
 
-            // custom events
-            data: null,
+// date range
+// [new Date(), null] or ['2015/11/23']
+selectedRang: null,
 
-            // shows labels
-            // {m} view mode，{d}date，{v}value
-            // false = disable
-            label: '{d}\n{v}',
+// custom events
+data: null,
 
-            // next / prev signs
-            prev: '&lt;',
-            next: '&gt;',
+// shows labels
+// {m} view mode，{d}date，{v}value
+// false = disable
+label: '{d}\n{v}',
 
-            // callbacks
-            viewChange: $.noop,
-            onSelected: function(view, date, value) {},
-            onMouseenter: $.noop,
-            onClose: $.noop
+// next / prev signs
+prev: '&lt;',
+next: '&gt;',
+
+// callbacks
+viewChange: $.noop,
+onSelected: function(view, date, value) {},
+onMouseenter: $.noop,
+onClose: $.noop
         },
 
         // static variable
@@ -406,16 +409,17 @@
             return week.join('');
         },
         getMonthHtml: function() {
-            var month = [],
+            var monthArray = this.options.monthArray,
+                month = [],
                 w = this.width / 4,
                 h = this.height / 4,
-                i = 1;
+                i = 0;
 
-            for (; i < 13; i++) {
+            for (; i < 12; i++) {
                 month.push(MONTH_ITEM_TPL.repeat({
                     w: w,
                     h: h,
-                    m: i
+                    m: monthArray[i]
                 }));
             }
 
@@ -469,29 +473,60 @@
             switch (date.getDay()) {
                 case 0:
                     getDayName = "Sonntag";
-                    break;
+                break;
                 case 1:
                     getDayName = "Montag";
-                    break;
+                break;
                 case 2:
                     getDayName = "Dienstag";
-                    break;
+                break;
                 case 3:
                     getDayName = "Mittwoch";
-                    break;
+                break;
                 case 4:
                     getDayName = "Donnerstag";
-                    break;
+                break;
                 case 5:
                     getDayName = "Freitag";
-                    break;
+                break;
                 case 6:
                     getDayName = "Samstag";
             }
 
-            this.$trigger.val(getDayName + ', ' + date.format(this.options.format));
+            var prevData = this.$trigger.val();
+
+            if(prevData != '' ) {
+                prevData = prevData + ', ';
+            }
+
+            this.$trigger.val(prevData + getDayName + ' ' + date.format(this.options.format));
             this.options.onClose.call(this, view, date, data);
-            this.$element.hide();
+            //this.$element.hide();
+
+            var newData = this.$trigger.val();
+
+            if(newData != '' ) {
+                var items = newData.split(", ");
+                var newValue = "";
+
+                var result = [];
+                $.each(items, function(i, e) {
+                    if ($.inArray(e, result) == -1) {
+                        result.push(e);
+                    } else {
+                        result.splice($.inArray(e, result), 1);
+                    }
+                });
+
+                $.each(result, function(i, e) {
+                    if(newValue != '') {
+                        newValue = newValue + ', ';
+                    }
+                    newValue = newValue + e;
+                });
+
+                this.$trigger.val(newValue);
+            }
         },
         trigger: function() {
 
@@ -596,6 +631,8 @@
 
             this.setView('date');
 
+            console.log(_this, $dis);
+
             return {
                 y: y,
                 m: m
@@ -620,7 +657,7 @@
                 toggleClass = function() {
                     this.$dateItems.children(':eq(1)')
                         .find('[' + ITEM_DAY + ']:not(.' + NEW_DAY_CLASS + ', .' + OLD_DAY_CLASS + ')')
-                        .removeClass(SELECT_CLASS)
+                        //.removeClass(SELECT_CLASS)
                         .filter(function(index) {
                             return parseInt(this.innerHTML) === d;
                         }).addClass(SELECT_CLASS);
@@ -707,7 +744,12 @@
                     cls = getClass(this),
                     type = /new|old/.test(cls) ? cls.match(/new|old/)[0] : '';
 
+                    
                 var day = _this.selectedDay(d, type);
+
+                if(cls == 'selected-date') {
+                    $(this).removeClass('selected-date');
+                }
 
                 _this.options.onSelected.call(this, 'date', day, $(this).data(MARK_DATA));
 
@@ -715,7 +757,7 @@
 
             }).on('click', '[' + ITEM_MONTH + ']', function() {
                 var y = Number(_this.$disMonth.html()),
-                    m = parseInt(this.innerHTML);
+                    m = $(this).index() + 1;;
 
                 _this.updateDateView(y, m);
                 vc('date', y, m);

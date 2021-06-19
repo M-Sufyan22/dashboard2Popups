@@ -1200,7 +1200,7 @@ table.dataTable.no-footer {
 
 #mobileCal table td {
     border: 1px solid rgba(197, 198, 209, 0.4);
-    padding: 15px 8px;
+    padding: 15px 6px;
     cursor: pointer;
 }
 

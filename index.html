@@ -3797,7 +3797,7 @@ Tor</span>
             $(".chosen-select").chosen({
                 width: "100%"
             }, );
-            //$('.main-calendar-columns').css("width", $('.main-content').width());
+
             $(".main-calendar-wrapper").slick({
                 prevArrow: '<div class="calendar-slider-prev"><i class="far fa-angle-left"></i></div>',
                 nextArrow: '<div class="calendar-slider-next"><i class="far fa-angle-right"></i></div>',
@@ -3823,31 +3823,50 @@ Tor</span>
 
 
             $('.calendar-timepicker').timepicker();
+            $(window).resize(function() {
 
-            $('#calendar-datepicker').calendar({
-                width: 350,
-                height: 265,
-                trigger: '#calendarInputDate',
-                startWeek: 1,
-                format: 'dd/mm/yyyy',
-                selectedRang: null,
+                $('.main-calendar-wrapper').css("width", $('.main-content').width());
+                $('.main-calendar-columns').css("width", $('.main-content').width());
+
             });
-            $('#calendar-datepicker2').calendar({
-                width: 700,
-                height: 300,
-                trigger: '#calendarInputDate2',
-                startWeek: 1,
-                format: 'dd/mm/yyyy',
-                selectedRang: null,
-            });
+
+            function checkWidth() {
+                var w = window.innerWidth;
+                if (w < 450) {
+                    $('#calendar-datepicker').calendar({
+                        width: 250,
+                        height: 200,
+                        trigger: '#calendarInputDate',
+                        startWeek: 1,
+                        format: 'dd/mm/yyyy',
+                        selectedRang: null,
+                    });
+                } else if (w < 300) {
+                    $('#calendar-datepicker').calendar({
+                        width: 150,
+                        height: 80,
+                        trigger: '#calendarInputDate',
+                        startWeek: 1,
+                        format: 'dd/mm/yyyy',
+                        selectedRang: null,
+                    });
+                } else {
+                    $('#calendar-datepicker').calendar({
+                        width: 350,
+                        height: 265,
+                        trigger: '#calendarInputDate',
+                        startWeek: 1,
+                        format: 'dd/mm/yyyy',
+                        selectedRang: null,
+                    });
+                }
+            }
+
+            checkWidth();
 
         });
 
-        $(window).resize(function() {
 
-            $('.main-calendar-wrapper').css("width", $('.main-content').width());
-            //$('.main-calendar-columns').css("width", $('.main-content').width());
-        });
         $("#calendarInputShifts").editableSelect({
             effect: "slide",
         });
@@ -3899,8 +3918,7 @@ Tor</span>
                             if (childNodes[j].classList.contains('dycalendar-target-date')) {
 
                                 childNodes[j].classList.remove('dycalendar-target-date');
-                                childNodes[j].innerHTML = hisValue;
-                                console.log("yess")
+
                             }
                         }
                         this.setAttribute('class', 'dycalendar-target-date');
@@ -3911,44 +3929,6 @@ Tor</span>
             }
         }
         adClickEventToTd()
-        var chosenSelects = $('.ui-select').find('.chosen-select, [chosen]'),
-            $select, $option;
-
-        if (chosenSelects) {
-            chosenSelects.chosen();
-
-            // Check for 'chosen' elements on mobile devices
-            // -----
-            // Given that ChosenJS has expressly been disabled from running
-            // on mobile browsers, the styles have to be applied manually.
-            // Source: https://github.com/harvesthq/chosen/pull/1388
-            // -----
-            // The code below gathers all 'chosen' selectors and adds
-            // 'chosen-mobile' as a className. This className is then
-            // used to apply the necessary styles for mobile browsers.
-            // Within each select, if an 'option' has an empty value,
-            // then that value will be given 'selected' and 'disabled'
-            // attributes to act as a placeholder, adopting the text
-            // in the 'data-placeholder' as the text to be displayed.
-            if (/iP(od|hone)/i.test(window.navigator.userAgent) ||
-                (/Android/i.test(window.navigator.userAgent) && /Mobile/i.test(window.navigator.userAgent))) {
-                chosenSelects.each(function() {
-                    $select = $(this);
-                    $select.addClass('chosen-mobile');
-
-                    $select.find('option').each(function() {
-                        $option = $(this);
-
-                        if ($option.val() == '') {
-                            $option
-                                .attr('selected', 'selected')
-                                .attr('disabled', 'disabled')
-                                .text($select.data('placeholder'));
-                        }
-                    });
-                });
-            }
-        }
     </script>
 
     <!-- jQuery ui -->

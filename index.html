@@ -5053,11 +5053,9 @@
 
            let childLength = childNodes.length;
            for (var i = 0; i < childLength; i++) {
-            console.log(calValueT)
             if(calValueT){
                 if(parseInt(childNodes[i].firstChild.innerText) === calValueT){
                     childNodes[i].firstChild.classList.add("today");
-                    console.log("yes",childNodes[i].firstChild)
               
                     childNodes[i].firstChild.parentElement.parentElement.classList.add("my-cal-currentWeakActive");
                  

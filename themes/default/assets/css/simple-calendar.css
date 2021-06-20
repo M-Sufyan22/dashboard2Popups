@@ -1,0 +1,287 @@
+#simple-calendar header .month {
+    display: none
+}
+
+.my-cal {
+    position: relative;
+    /* overflow: hidden; */
+    text-transform: capitalize;
+    text-align: center;
+    font: 15px/1em inherit;
+    color: #545A5C;
+    width: 90%;
+    margin: 12px auto;
+}
+
+.my-cal a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.my-cal header .simple-calendar-btn {
+    display: inline-block;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: #6691CC;
+    border-radius: 50%;
+    background-color: transparent;
+    top: 0;
+}
+
+.my-cal header .simple-calendar-btn:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    /* transform: translate(-50%, -50%); */
+    width: 15px;
+    height: 15px;
+    border-style: solid;
+    border-width: 3px 3px 0 0;
+    transform: rotate(45deg);
+    transform-origin: center center;
+}
+
+.my-cal header .btn-prev {
+    left: -20px;
+    transform: rotate(-180deg);
+}
+
+.my-cal header .btn-next {
+    top: -12px;
+    right: -20px;
+}
+
+.my-cal header .btn-next:before {
+    transform: rotate(45deg);
+}
+
+.my-cal header .month {
+    padding: 0;
+    margin: 0;
+}
+
+.my-cal header .month .year {
+    font-size: 0.6em;
+    font-weight: 100;
+}
+
+.my-cal table {
+    width: 100%;
+    border-spacing: 0px;
+}
+
+.my-cal thead {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.my-cal tbody td {
+    padding: .8em .1em;
+}
+
+.my-cal thead td {
+    border: none;
+    padding-bottom: 7px;
+}
+
+.my-cal .day {
+    position: relative;
+    display: inline-block;
+    width: 2.5em;
+    height: 2.5em;
+    line-height: 2.5em;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.my-cal .day:hover {
+    border: 2px solid #35A0B8;
+}
+
+.my-cal .day.today {
+    background: #35A0B8;
+    color: white;
+}
+
+.my-cal .day.today.has-event:after {
+    background: white;
+}
+
+.my-cal .day.wrong-month {
+    color: #CBD1D2;
+}
+
+.my-cal .day.wrong-month:hover {
+    border: 2px solid transparent;
+}
+
+.my-cal .day.has-event:after {
+    content: '';
+    position: absolute;
+    top: calc(50% + .6em);
+    left: calc(50% - 2px);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #6691CC;
+}
+
+.my-cal .day.disabled {
+    cursor: default;
+}
+
+.my-cal .day.disabled:hover {
+    border: 2px solid transparent;
+}
+
+.my-cal .event-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 70px;
+    background: #545A5C;
+    box-sizing: border-box;
+}
+
+.my-cal .event-container .event-wrapper {
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.my-cal .event-container .close {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.my-cal .event-container .close:before,
+.my-cal .event-container .close:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background-color: #CBD1D2;
+}
+
+.my-cal .event-container .close:before {
+    transform: rotate(45deg);
+}
+
+.my-cal .event-container .close:after {
+    transform: rotate(-45deg);
+}
+
+.my-cal .event-container .event {
+    position: relative;
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 1em;
+    background: #6691CC;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
+    text-align: left;
+    color: white;
+}
+
+.my-cal .event-container .event-date {
+    margin-bottom: 1em;
+}
+
+.my-cal .event-container .event-hour {
+    float: right;
+}
+
+.my-cal .event-container .event-summary {
+    font-weight: 600;
+}
+
+.my-cal .filler {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: #545A5C;
+    transform: translate(-50%, -50%);
+}
+
+
+/* resposive */
+
+@media only screen and (max-width:350px) {
+    #simple-calendar .my-cal table td {
+        padding: 5px;
+        font-size: 13px;
+    }
+    .my-cal table thead {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width:350px) {
+    #simple-calendar .my-cal table td {
+        padding: 5px;
+        font-size: 10px;
+    }
+    .my-cal table thead {
+        font-size: 10px;
+    }
+}
+
+
+/* show hide  */
+
+.my-cal table {
+    /* display: flex;
+  flex-direction: column; */
+}
+
+.my-cal thead {
+    display: flex;
+    border-bottom: 1px solid rgba(197, 198, 209, 0.4);
+}
+
+.my-cal table td,
+.my-cal thead td {
+    width: 14.285%;
+}
+
+.my-cal table tbody tr {
+    display: none
+}
+
+#simple-calendar table tbody .my-cal-currentWeakActive {
+    display: flex;
+    border: none;
+}
+
+
+/* #simple-calendar table tbody .my-cal-currentWeakActive td {
+  border: none
+} */
+
+.show-full-simple-cal .my-cal table tbody tr {
+    display: flex !important;
+}
+
+.show-full-simple-cal .my-cal table tr td,
+.show-full-simple-cal .my-cal .my-cal-currentWeakActive td {
+    border: 1px solid rgba(197, 198, 209, 0.4) !important;
+}
+
+.show-full-simple-cal .simple-calendar-btn {
+    display: none !important;
+}

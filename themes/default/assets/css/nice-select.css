@@ -183,3 +183,11 @@
 .no-csspointerevents .nice-select.open .list {
     display: block;
 }
+
+
+/* month and year select */
+
+#month,
+#year {
+    padding-left: 15px;
+}

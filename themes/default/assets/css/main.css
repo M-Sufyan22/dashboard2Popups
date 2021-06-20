@@ -1136,7 +1136,6 @@ table.dataTable.no-footer {
     width: 35px;
     height: 35px;
     background: #FFFFFF;
-    /* Color/Blue */
     border: 1px solid #35A0B8;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -1170,6 +1169,8 @@ table.dataTable.no-footer {
     font-size: light !important;
 }
 
+
+/*
 #mobileCal {
     width: 100%;
     min-height: 150px;
@@ -1251,11 +1252,13 @@ table.dataTable.no-footer {
 #mobileCal .dycalendar-month-container .dycalendar-header .dycalendar-prev-next-btn.prev-btn {
     left: -9px;
 }
+ */
 
 
 /* show full calendar on click class toggle Mobile===*/
 
-.show-full-cal-mob {
+
+/* .show-full-cal-mob {
     padding: 0 12px !important;
 }
 
@@ -1276,6 +1279,7 @@ table.dataTable.no-footer {
 .show-full-cal-mob .dycalendar-prev-prev-btn {
     display: none !important;
 }
+ */
 
 
 /*  */
@@ -1290,7 +1294,7 @@ table.dataTable.no-footer {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    margin-top: -35px;
+    margin-top: -25px;
 }
 
 .mobileCalyear .dycalendar-day-container {

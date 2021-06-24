@@ -716,12 +716,12 @@ table.dataTable.no-footer {
 }
 
 .calendar-slider-prev {
-    left: 10px;
+    left: 0;
     padding-left: 11px;
 }
 
 .calendar-slider-next {
-    right: 10px;
+    right: 0;
     padding-left: 13px;
 }
 
@@ -845,9 +845,21 @@ table.dataTable.no-footer {
     background-color: #35A0B8;
 }
 
-.main-calendar-dialog .modal-header {
+.main-calendar-dialog .modal-header-cs {
     background-color: #A8ACFC;
     color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
 }
 
 .main-calendar-form-wrapper {
@@ -858,10 +870,11 @@ table.dataTable.no-footer {
     overflow-x: hidden;
 }
 
-.main-calendar-dialog .modal-header .btn-close {
+.main-calendar-dialog .modal-header-cs .btn-close {
     color: #fff;
     background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
     opacity: 0.8;
+    font-size: 23px;
 }
 
 .main-calendar-form label {
@@ -938,7 +951,7 @@ table.dataTable.no-footer {
 
 .chosen-container-multi .chosen-choices li.search-choice {
     padding: 7px 20px 7px 5px;
-    margin: 0 5px 0 0;
+    margin: 1px 8px 1px 0;
     border: none;
     background-color: #D7ECF1;
     background-image: none;
@@ -980,7 +993,7 @@ table.dataTable.no-footer {
 }
 
 .chosen-container .chosen-results li.highlighted {
-    background-color: #F1FBFD;
+    background-color: transparent;
     background-image: none;
     color: #000;
 }
@@ -1294,7 +1307,7 @@ table.dataTable.no-footer {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    margin-top: -25px;
+    margin-top: -15px;
 }
 
 .mobileCalyear .dycalendar-day-container {
@@ -1302,9 +1315,8 @@ table.dataTable.no-footer {
 }
 
 .mobileCalyear .dycalendar-day-container .dycalendar-span-date {
-    font-size: 16px !important;
+    font-size: 14px !important;
     margin: 0 3px;
-    font-weight: 600;
 }
 
 
@@ -1322,3 +1334,6 @@ table.dataTable.no-footer {
     -ms-transform: rotate(-180deg);
     transform: rotate(-180deg)
 }
+
+
+/* model */

@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>aoratime.com</title>
+    <!-- pre loads -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" as="style" />
+    <link rel="preload" href="themes/default/assets/css/main.css" as="style" />
+    <link rel="preload" href="themes/default/assets/css/style.css" as="style" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <!-- Bootstrap CSS -->
@@ -224,7 +228,7 @@
                                  text-short
                                  table-view-change-btn
                                  mx-3
-                                 d-lg-flex d-none
+                                 d-lg-flex d-none ml-4
                                  " id="table-view-changebtn">
                               <i class="far fa-bars me-2"></i> Table view
                               </button>
@@ -4621,10 +4625,11 @@
                                                                             </div>
             </section>
             <!-- Filter Modal -->
+            <div id="filterModelBox-overlay" class="filter-popup-box-overlay"></div>
             <div id="filterModelBox" class="filter-popup-box">
-                <button class="close-filter-model-btn" id="close-btn">
+                <!-- <button class="close-filter-model-btn" id="close-btn">
                <i class="fa fa-times"></i>
-               </button>
+               </button> -->
                 <div class="modal-body main-calendar-form-wrapper">
                     <form class="main-calendar-form">
                         <div class="main-calendar-form-section-two" style="border-bottom: none">
@@ -4732,7 +4737,7 @@
       <div class="modal fade" id="calenderModel">
          <div class="modal-dialog modal-dialog-centered main-calendar-dialog">
             <div class="modal-content">
-               <div class="modal-header">
+               <div class="modal-header-cs">
                   <h5 class="modal-title" id="exampleModalLongTitle">Details</h5>
                   <button
                      type="button"
@@ -4744,7 +4749,7 @@
                <div class="modal-body main-calendar-form-wrapper">
                   <form class="main-calendar-form">
                      <div class="main-calendar-form-section-one">
-                        <div class="mb-3">
+                        <div>
                            <label for="calendarInputDate" class="form-label text-short"
                               >Datum</label
                               >
@@ -4774,6 +4779,7 @@
                                     <option value="night" select>Night</option>
                                     <option value="day">Day</option>
                                  </select>
+                               
                               </div>
                            </div>
                            <div class="col-md-3">
@@ -4782,13 +4788,17 @@
                                  class="form-label text-short text-ellipsis mb-0"
                                  >Mitarbeiter Anazahi</label
                                  >
-                              <input
-                                 type="number"
-                                 class="form-control text-short"
-                                 id="calendarInputEmployeesNo"
-                                 value="1"
-                                 defaultValue="1"
-                                 />
+                                 <div class="emmployee-num-wrapper-input">
+                                    <input
+                                    type="number"
+                                    class="form-control text-short"
+                                    id="calendarInputEmployeesNo"
+                                    value="1"
+                                    defaultValue="1"
+                                    />
+                                    <button class="employe-number-btns add" id="inc_emp_no"></button>
+                                    <button class="employe-number-btns remo" id="dec_emp_no"></button>
+                                 </div>
                            </div>
                         </div>
                         <div class="row mb-3">
@@ -4802,14 +4812,14 @@
                                     placeholder="Start Time"
                                     class="form-control text-short calendar-timepicker"
                                     id="calendarInputStart"
-                                    value="00:00"
+                                    value="00     :     00"
                                     />
                                  <span class="px-2">To</span>
                                  <input
                                     type="text"
-                                    placeholder="End Time"
                                     class="form-control text-short calendar-timepicker"
                                     id="calendarInputEnd"
+                                    value="00     :     00"
                                     />
                               </div>
                            </div>
@@ -4824,7 +4834,7 @@
                                  placeholder="Pause Time"
                                  class="form-control text-short calendar-timepicker"
                                  id="calendarInputPause"
-                                 value="00:00"
+                                 value="00     :     00"
                                  />
                            </div>
                         </div>
@@ -4912,10 +4922,9 @@
          $(document).ready(function () {
     
     $("#simple-calendar").simpleCalendar({
-        //Defaults options below
-        //string of months starting from january
+      // List of events
         months: ['january','february','march','april','may','june','july','august','september','october','november','december'],
-        days: ['Sun','Mon','Tue','wed','Thurs','Friday','Saturday'],
+        days: ['S','M','T','w','T','F','S'],
         displayYear: false,              // Display year in header
         fixedStartDay: true,            // Week begin always by monday or by day set by number 0 = sunday, 7 = saturday, false = month always begin by first day of the month
         displayEvent: false,             // Display existing event
@@ -5027,13 +5036,13 @@
                     hisValue = this.firstChild.innerText;
                if (hisValue) {
                  for (let j = 0; j < ss; j++) {
-                   if (
-                     childNodes[j].firstChild.classList.contains("today")
-                   ) {
-                     childNodes[j].firstChild.classList.remove("today");
+                  if(childNodes[j].firstChild.classList.contains("selected-day")){
+                     childNodes[j].firstChild.classList.remove("selected-day");
                    }
                  }
-                 this.firstChild.classList.add("today");
+                 if (!this.firstChild.classList.contains("today")) {
+                     this.firstChild.classList.add("selected-day");
+                  }
                }         
                 });
             }
@@ -5063,11 +5072,12 @@
                 }
             }
          }
-             if(todayDt){
+         adClickEventToTd();
+            if(todayDt){
                 todayDt.parentElement.parentElement.classList.add("my-cal-currentWeakActive");
-                  adClickEventToTd();
+                  
             }
-           }, 400);
+           }, 100);
          }
          getCurrentWeak();
       </script>

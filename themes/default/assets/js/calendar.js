@@ -375,7 +375,7 @@
                 $days.append(this.getDayItem(year, month, c, CURR_FLAG));
             }
 
-            for (var n = 1, nl = 42 - count; n <= nl; n++) {
+            for (var n = 1, nl = 35 - count; n <= nl; n++) {
 
                 $days.append(this.getDayItem(nextM.y, nextM.m, n, NEXT_FLAG));
             }

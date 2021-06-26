@@ -135,9 +135,10 @@
     color: #CBD1D2;
 }
 
-.my-cal .day.wrong-month:hover {
+
+/* .my-cal .day.wrong-month:hover {
     border: 2px solid transparent;
-}
+} */
 
 .my-cal .my-cal-currentWeakActive .day {
     position: relative;

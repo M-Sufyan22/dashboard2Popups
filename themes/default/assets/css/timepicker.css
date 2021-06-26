@@ -138,7 +138,12 @@
 .calendar-timepicker {
     font-size: 19px !important;
     text-align: center;
-    /* word-spacing: 3px; */
-    /* letter-spacing: 7px; */
     color: #555 !important;
+}
+
+@media only screen and (max-width:450px) {
+    .calendar-timepicker {
+        font-size: 14px !important;
+        padding: .475rem 0rem !important;
+    }
 }

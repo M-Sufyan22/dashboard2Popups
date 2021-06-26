@@ -18,7 +18,6 @@
 
 .my-cal {
     position: relative;
-    /* overflow: hidden; */
     text-transform: capitalize;
     text-align: center;
     font: 15px/1em inherit;
@@ -134,11 +133,6 @@
 .my-cal .day.wrong-month {
     color: #CBD1D2;
 }
-
-
-/* .my-cal .day.wrong-month:hover {
-    border: 2px solid transparent;
-} */
 
 .my-cal .my-cal-currentWeakActive .day {
     position: relative;
@@ -277,11 +271,6 @@
     display: flex;
     border: none;
 }
-
-
-/* #simple-calendar table tbody .my-cal-currentWeakActive td {
-  border: none
-} */
 
 .show-full-simple-cal::after {
     content: "";

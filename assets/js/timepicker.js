@@ -1,7 +1,3 @@
-/*!
- * Bootstrap Timepicker
- * @author Amir Hussain
- **/
 var bstptid = '';
 ! function(t, i) {
     "function" == typeof define && define.amd ? define(["jquery"], i) : "object" == typeof exports ? module.exports = i(require("jquery")) : t.$ = i(t.jQuery)
